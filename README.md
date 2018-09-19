@@ -2,9 +2,22 @@
 
 > Help understand and debug queries
 
+LINKS
+https://www.elastic.co/guide/en/kibana/current/development-embedding-visualizations.html
+https://discuss.elastic.co/t/announcement-introducing-inquisitor-a-new-site-plugin-to-help-debug-queries/10976
+
 ---
 
 ## development
+ |some_parent_folder_name
+   |kibana
+   |kibana-extras
+     |iq-2
+ - ensure you have folder structure above where kibana is the es/kibana cloned repo and iq-2 is this cloned repo
+ - nvm local 8.11.4
+ - boot up elasticsearch
+ - yarn kbn boostrap (1st time)
+ - yarn start
 
 See the [kibana contributing guide](https://github.com/elastic/kibana/blob/master/CONTRIBUTING.md) for instructions setting up your development environment. Once you have completed that, use the following yarn scripts.
 
