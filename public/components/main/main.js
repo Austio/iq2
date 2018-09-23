@@ -1,16 +1,10 @@
 import React from 'react';
 import {
   EuiPage,
-  EuiPageHeader,
-  EuiTitle,
-  EuiPageBody,
-  EuiPageContent,
-  EuiPageContentHeader,
-  EuiPageContentBody,
-  EuiText
 } from '@elastic/eui';
-import IQMenu from './menu';
 
+import IQMenu from './menu';
+import IQAnalyzer from './analyzer/index';
 
 export class Main extends React.Component {
   constructor(props) {
@@ -34,26 +28,7 @@ export class Main extends React.Component {
     return (
       <EuiPage>
         <IQMenu />
-        <EuiPageBody>
-          HIYA Body
-          <EuiPageHeader>
-            <EuiTitle size="l">
-              <h1>{title} Hello World!</h1>
-            </EuiTitle>
-          </EuiPageHeader>
-          <EuiPageContent>
-            <EuiPageContentHeader>
-              <EuiTitle>
-                <h2>Congratulations</h2>
-              </EuiTitle>
-            </EuiPageContentHeader>
-            <EuiPageContentBody>
-              <EuiText>
-                <p>The server time (via API call) is {this.state.time || 'NO API CALL YET'}</p>
-              </EuiText>
-            </EuiPageContentBody>
-          </EuiPageContent>
-        </EuiPageBody>
+        <IQAnalyzer />
       </EuiPage>
     );
   }
