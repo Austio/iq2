@@ -9,6 +9,8 @@ import {
   EuiPageContentBody,
   EuiText
 } from '@elastic/eui';
+import IQMenu from './menu';
+
 
 export class Main extends React.Component {
   constructor(props) {
@@ -28,9 +30,12 @@ export class Main extends React.Component {
   }
   render() {
     const { title } = this.props;
+
     return (
       <EuiPage>
+        <IQMenu />
         <EuiPageBody>
+          HIYA Body
           <EuiPageHeader>
             <EuiTitle size="l">
               <h1>{title} Hello World!</h1>
@@ -44,7 +49,6 @@ export class Main extends React.Component {
             </EuiPageContentHeader>
             <EuiPageContentBody>
               <EuiText>
-                <h3>You have successfully created your first Kibana Plugin!</h3>
                 <p>The server time (via API call) is {this.state.time || 'NO API CALL YET'}</p>
               </EuiText>
             </EuiPageContentBody>
