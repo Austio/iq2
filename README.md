@@ -8,16 +8,22 @@ https://discuss.elastic.co/t/announcement-introducing-inquisitor-a-new-site-plug
 
 ---
 
-## development
+## Development Setup
  |some_parent_folder_name
    |kibana
-   |kibana-extras
-     |iq-2
+   |kibana-extra
+     |iq2
  - ensure you have folder structure above where kibana is the es/kibana cloned repo and iq-2 is this cloned repo
  - nvm local 8.11.4
- - boot up elasticsearch
- - yarn kbn boostrap (1st time)
- - yarn start
+ 
+ - From kibana repo
+   - ensure that you are the appropriate version branch (6.3)
+   - run `yarn kbn bootstrap`
+
+ - from iq2 directory 
+   - boot up elasticsearch  `docker-compose up`
+   - `yarn kbn boostrap` (1st time)
+   - `yarn start`
 
 See the [kibana contributing guide](https://github.com/elastic/kibana/blob/master/CONTRIBUTING.md) for instructions setting up your development environment. Once you have completed that, use the following yarn scripts.
 
