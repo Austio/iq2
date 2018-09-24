@@ -1,9 +1,28 @@
 import React from 'react';
 
+import {
+  EuiForm,
+  EuiFormRow,
+  EuiFieldText,
+  EuiFlexGroup,
+  EuiFlexItem,
+  EuiFieldSearch,
+  EuiButton,
+} from '@elastic/eui';
+
+function isUndefined(value) {
+  return typeof value === "undefined";
+}
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 export default class Analyzer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      query: "",
       token: {
         positon: 5
       },
@@ -11,20 +30,40 @@ export default class Analyzer extends React.Component {
         query: "Query",
       }
     };
+
+    this.setQuery = this.setQuery.bind(this);
+    this.submitQuery = this.submitQuery.bind(this);
+  }
+
+  submitQuery(event) {
+    event.preventDefault();
+
+    alert(event);
+  }
+
+  setQuery(event) {
+    this.setState({ query: event.target.value });
   }
 
   render() {
     return (
-      <div className="container-fluid" id="content" ng-controller="TokenizerCtrl">
-        <div className="row-fluid">
-          <div className="span8 offset2">
-            <form>
-              <fieldset>
-                <textarea rows="2" ng-model="tokenizer.query">{this.state.tokenizer.query}</textarea><br/>
-              </fieldset>
-            </form>
-          </div>
-        </div>
+      <div ng-controller="TokenizerCtrl">
+        <EuiFlexGroup>
+          <EuiFlexItem>
+            <EuiFieldText
+              placeholder="Enter Something To Tokenize..."
+              fullWidth
+              onChange={this.setQuery}
+              value={this.state.query}
+            />
+            <EuiButton
+              onClick={this.submitQuery}
+            >
+              Submit
+            </EuiButton>
+          </EuiFlexItem>
+        </EuiFlexGroup>
+
         <div className="row-fluid">
           <div className="span10 offset1">
             <table className="table table-bordered">
