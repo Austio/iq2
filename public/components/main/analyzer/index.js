@@ -10,6 +10,8 @@ import {
   EuiButton,
 } from '@elastic/eui';
 
+import PropTypes from 'prop-types';
+
 function isUndefined(value) {
   return typeof value === "undefined";
 }
@@ -17,6 +19,8 @@ function isUndefined(value) {
 function isNumber(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
+
+import analyzeToken from './analyzeToken';
 
 export default class Analyzer extends React.Component {
   constructor(props) {
@@ -38,7 +42,9 @@ export default class Analyzer extends React.Component {
   submitQuery(event) {
     event.preventDefault();
 
-    alert(event);
+    analyzeToken(this.props.httpClient)(this.state.query)
+      .then(r => console.log(r))
+      .catch(r => console.warn(r));
   }
 
   setQuery(event) {
@@ -93,3 +99,7 @@ export default class Analyzer extends React.Component {
     );
   }
 }
+
+Analyzer.propTypes = {
+  httpClient: PropTypes.function
+};

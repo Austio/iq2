@@ -4,7 +4,7 @@ function esUrl(parts = {}) {
   const { path, query } = parts;
 
   if (path) {
-    return esHost + '/' path;
+    return esHost + path;
   }
 
   return esHost;

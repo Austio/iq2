@@ -23,12 +23,10 @@ export class Main extends React.Component {
     });
   }
   render() {
-    const { title } = this.props;
-
     return (
       <EuiPage>
         <IQMenu />
-        <IQAnalyzer />
+        <IQAnalyzer httpClient={this.props.httpClient}/>
       </EuiPage>
     );
   }

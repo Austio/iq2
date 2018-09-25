@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-
   elasticsearch_kibana_dev:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.3.0
     ports:
@@ -9,3 +8,8 @@ services:
     - "9300:9300"
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      xpack.security.enabled: "false"
+      http.cors.enabled: "true"
+      http.cors.allow-origin: "*"
+      http.cors.allow-headers: "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+      http.cors.allow-credentials: "true"

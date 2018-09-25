@@ -3,8 +3,15 @@ import { esUrl } from '../../../lib/helper';
 
 const url = esUrl({ path: "/_analyze?tokenizer "});
 
-function analyzeToken(text) {
-  return function analyzeWithTokenizer(tokenizer) {
+export default function analyzeText(http) {
+  alert(http);
+
+  return function analyzeWithTokenizer(text =  "foo", analyzer = "standard") {
+    return http.post(url, {
+      analyzer,
+      text,
+    });
+
     // def analyze(data, analyzer="standard"):
     // d = {
     //   "analyzer": analyzer,
@@ -17,7 +24,6 @@ function analyzeToken(text) {
 }
 
 function TokenizerCtrl($scope, $http, Tokenizer, Data){
-
 
   $scope.analyze = function(tokenizer) {
     var path = $scope.data.host + "/_analyze?tokenizer=" + tokenizer;
