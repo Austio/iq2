@@ -11,5 +11,5 @@ services:
       xpack.security.enabled: "false"
       http.cors.enabled: "true"
       http.cors.allow-origin: "*"
-      http.cors.allow-headers: "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+      http.cors.allow-headers: "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, kbn-version, kbn-name"
       http.cors.allow-credentials: "true"
