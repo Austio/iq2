@@ -1,11 +1,9 @@
 // TokenizerCtrl
 import { esUrl } from '../../../lib/helper';
 
-const url = esUrl({ path: "/_analyze?tokenizer "});
+const url = esUrl({ path: "/_analyze"});
 
 export default function analyzeText(http) {
-  alert(http);
-
   return function analyzeWithTokenizer(text =  "foo", analyzer = "standard") {
     return http.post(url, {
       analyzer,
@@ -19,7 +17,6 @@ export default function analyzeText(http) {
     // }
     // url = 'http://localhost:9200/_analyze?format=yaml'
     // print requests.get(url, data=json.dumps(d), headers=headers).text
-
   }
 }
 
