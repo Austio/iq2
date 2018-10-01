@@ -3,21 +3,39 @@ import { esUrl } from '../../../lib/helper';
 
 const url = esUrl({ path: "/_analyze"});
 
+// {
+//   "tokens": [
+//   {
+//     "token": "foo",
+//     "start_offset": 0,
+//     "end_offset": 3,
+//     "type": "<ALPHANUM>",
+//     "position": 0
+//   },
+//   {
+//     "token": "bar",
+//     "start_offset": 4,
+//     "end_offset": 7,
+//     "type": "<ALPHANUM>",
+//     "position": 1
+//   },
+//   {
+//     "token": "baz",
+//     "start_offset": 8,
+//     "end_offset": 11,
+//     "type": "<ALPHANUM>",
+//     "position": 2
+//   }
+// ]
+// }
+
 export default function analyzeText(http) {
-  return function analyzeWithTokenizer(text =  "foo", analyzer = "standard") {
+  return function analyzeToken(text: "keyword foo bar baz", analyzer: "standard") {
     return http.post(url, {
       analyzer,
       text,
     });
-
-    // def analyze(data, analyzer="standard"):
-    // d = {
-    //   "analyzer": analyzer,
-    //   "text": data
-    // }
-    // url = 'http://localhost:9200/_analyze?format=yaml'
-    // print requests.get(url, data=json.dumps(d), headers=headers).text
-  }
+  };
 }
 
 function TokenizerCtrl($scope, $http, Tokenizer, Data){
