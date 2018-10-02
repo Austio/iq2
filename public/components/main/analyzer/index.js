@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { ENTER } from '../../../lib/keyCodes';
+
 import {
   EuiForm,
   EuiFormRow,
@@ -44,6 +46,7 @@ export default class Analyzer extends React.Component {
 
     this.setQuery = this.setQuery.bind(this);
     this.submitQuery = this.submitQuery.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
   }
 
   submitQuery(event) {
@@ -54,6 +57,12 @@ export default class Analyzer extends React.Component {
         this.setState({ tokens: r.data.tokens });
       })
       .catch(r => console.warn(r));
+  }
+
+  onKeyDown(e) {
+    if (e.keyCode === ENTER) {
+      this.submitQuery(e);
+    }
   }
 
   setQuery(event) {
@@ -75,6 +84,7 @@ export default class Analyzer extends React.Component {
             <EuiFieldText
               placeholder="Enter Something To Tokenize..."
               fullWidth
+              onKeyDown={this.onKeyDown}
               onChange={this.setQuery}
               value={this.state.query}
             />
