@@ -8,6 +8,12 @@ import {
   EuiFlexItem,
   EuiFieldSearch,
   EuiButton,
+  EuiTable,
+  EuiTableHeader,
+  EuiTableHeaderCell,
+  EuiTableBody,
+  EuiTableRow,
+  EuiTableRowCell
 } from '@elastic/eui';
 
 import PropTypes from 'prop-types';
@@ -32,7 +38,8 @@ export default class Analyzer extends React.Component {
       },
       tokenizer: {
         query: "Query",
-      }
+      },
+      tokens: [],
     };
 
     this.setQuery = this.setQuery.bind(this);
@@ -43,7 +50,9 @@ export default class Analyzer extends React.Component {
     event.preventDefault();
 
     analyzeToken(this.props.httpClient)(this.state.query)
-      .then(r => console.log(r))
+      .then(r => {
+        this.setState({ tokens: r.data.tokens });
+      })
       .catch(r => console.warn(r));
   }
 
@@ -52,8 +61,15 @@ export default class Analyzer extends React.Component {
   }
 
   render() {
+    const tableTokenRows = this.state.tokens.map(token => (
+      <EuiTableRow>
+        <EuiTableRowCell>...</EuiTableRowCell>
+        <EuiTableRowCell>{token.token}</EuiTableRowCell>
+      </EuiTableRow>
+    ));
+
     return (
-      <div ng-controller="TokenizerCtrl">
+      <div>
         <EuiFlexGroup>
           <EuiFlexItem>
             <EuiFieldText
@@ -69,6 +85,20 @@ export default class Analyzer extends React.Component {
             </EuiButton>
           </EuiFlexItem>
         </EuiFlexGroup>
+
+        <EuiTable>
+          <EuiTableHeader>
+            <EuiTableHeaderCell>
+              Analyzer
+            </EuiTableHeaderCell>
+            <EuiTableHeaderCell>
+              Tokens
+            </EuiTableHeaderCell>
+          </EuiTableHeader>
+          <EuiTableBody>
+            {tableTokenRows}
+          </EuiTableBody>
+        </EuiTable>
 
         <div className="row-fluid">
           <div className="span10 offset1">
