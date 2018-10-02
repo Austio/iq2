@@ -2,6 +2,8 @@ import React from 'react';
 
 import { ENTER } from '../../../lib/keyCodes';
 
+import AnalyzedRow from './analyzedRow';
+
 import {
   EuiForm,
   EuiFormRow,
@@ -35,13 +37,8 @@ export default class Analyzer extends React.Component {
     super(props);
     this.state = {
       query: "",
-      token: {
-        positon: 5
-      },
-      tokenizer: {
-        query: "Query",
-      },
       tokens: [],
+      analyzer: "standard",
     };
 
     this.setQuery = this.setQuery.bind(this);
@@ -70,12 +67,7 @@ export default class Analyzer extends React.Component {
   }
 
   render() {
-    const tableTokenRows = this.state.tokens.map(token => (
-      <EuiTableRow>
-        <EuiTableRowCell>...</EuiTableRowCell>
-        <EuiTableRowCell>{token.token}</EuiTableRowCell>
-      </EuiTableRow>
-    ));
+    const tableTokenRows = <AnalyzedRow key={this.state.analyzer} tokens={this.state.tokens} analyzer={this.state.analyzer} />
 
     return (
       <div>
@@ -109,32 +101,6 @@ export default class Analyzer extends React.Component {
             {tableTokenRows}
           </EuiTableBody>
         </EuiTable>
-
-        <div className="row-fluid">
-          <div className="span10 offset1">
-            <table className="table table-bordered">
-              <thead>
-              <tr>
-                <td >Analyzer</td>
-                <td>Tokenized Text</td>
-              </tr>
-              </thead>
-              <tbody>
-              <tr ng-repeat="t in tokenizer.tokenizers">
-                <td>t</td>
-                <td>
-                  <div className="label" ng-repeat="token in tokenizer.ttext[t]">
-                    <div>
-                      <span ng-bind-html-unsafe="token.token"></span>&nbsp;
-                      <span>{this.state.token.position}</span>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
     );
   }
