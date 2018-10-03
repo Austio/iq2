@@ -6,7 +6,7 @@ import AnalyzedRow from './analyzedRow';
 
 import {
   EuiForm,
-  EuiFormRow,
+  EuiHeader,
   EuiFieldText,
   EuiFlexGroup,
   EuiFlexItem,
@@ -41,10 +41,10 @@ export default class Analyzer extends React.Component {
     super(props);
     this.state = {
       querySubmitted: '',
-      queryInput: '',
+      queryInput: 'the quick fox jumped over the lazy brown dog',
       tokens: [],
       results: {},
-      analyzers: ['standard'],
+      analyzers: ['standard', 'simple', 'whitespace', 'stop', 'keyword', 'pattern', 'snowball'],
     };
 
     this.setQueryInput = this.setQueryInput.bind(this);
@@ -127,6 +127,8 @@ export default class Analyzer extends React.Component {
             </EuiButton>
           </EuiFlexItem>
         </EuiFlexGroup>
+
+        <EuiHeader>Results for {this.state.querySubmitted}</EuiHeader>
 
         <EuiTable>
           <EuiTableHeader>
