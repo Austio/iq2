@@ -23,7 +23,7 @@ export default class AnalyzedRow extends React.Component {
     super(props);
     this.state = {
       analyzer: props.analyzer,
-      tokens: [],
+      tokens: props.tokens,
     };
   }
 
@@ -47,5 +47,6 @@ export default class AnalyzedRow extends React.Component {
 
 AnalyzedRow.propTypes = {
   analyzer: PropTypes.string,
-  query: PropTypes.string,
+  // TODO array of specific shape here
+  // tokens: PropTypes.array,
 };

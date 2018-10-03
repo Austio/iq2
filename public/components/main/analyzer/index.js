@@ -32,27 +32,52 @@ function isNumber(n) {
 
 import analyzeToken from './analyzeToken';
 
+function getKey({ text, analyzer }) {
+  return `${text}____${analyzer}`;
+}
+
 export default class Analyzer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: "",
+      query: "Default Query",
       tokens: [],
-      analyzer: "standard",
+
+      results: {},
+      analyzers: ["standard"],
     };
 
     this.setQuery = this.setQuery.bind(this);
     this.submitQuery = this.submitQuery.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this.buildPromises = this.buildPromises.bind(this);
+    this.requestTokens = analyzeToken(this.props.httpClient);
+  }
+
+  buildPromises(text) {
+    const requests = this.state.analyzers.map(analyzer => {
+      return this.requestTokens({
+        analyzer,
+        text,
+      }).then(response => {
+        this.setState({
+          results: {
+            ...this.state.results,
+            [getKey({ text, analyzer })]: response,
+          }
+        });
+
+        return response;
+      });
+    });
+
+    return Promise.all(requests);
   }
 
   submitQuery(event) {
     event.preventDefault();
 
-    analyzeToken(this.props.httpClient)(this.state.query)
-      .then(r => {
-        this.setState({ tokens: r.data.tokens });
-      })
+    return this.buildPromises(this.state.query)
       .catch(r => console.warn(r));
   }
 
@@ -67,7 +92,21 @@ export default class Analyzer extends React.Component {
   }
 
   render() {
-    const tableTokenRows = <AnalyzedRow key={this.state.analyzer} tokens={this.state.tokens} analyzer={this.state.analyzer} />
+
+    // Should i just bring in redux here
+    // Separate the query that is types from submited (query and submittedQuery)
+    const text = this.state.query;
+
+    const tableTokenRows = this.state.analyzers.map(analyzer => {
+      const key = getKey({ text, analyzer });
+
+      const analyzerResult = this.state.results[key];
+      if (!analyzerResult) return;
+
+      const tokens = analyzerResult.data.tokens;
+
+      return <AnalyzedRow key={key} tokens={tokens} analyzer={analyzer} />
+    });
 
     return (
       <div>
