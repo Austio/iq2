@@ -23,7 +23,7 @@ import {
 import PropTypes from 'prop-types';
 
 function isUndefined(value) {
-  return typeof value === "undefined";
+  return typeof value === 'undefined';
 }
 
 function isNumber(n) {
@@ -40,14 +40,14 @@ export default class Analyzer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: "Default Query",
+      querySubmitted: '',
+      queryInput: '',
       tokens: [],
-
       results: {},
-      analyzers: ["standard"],
+      analyzers: ['standard'],
     };
 
-    this.setQuery = this.setQuery.bind(this);
+    this.setQueryInput = this.setQueryInput.bind(this);
     this.submitQuery = this.submitQuery.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.buildPromises = this.buildPromises.bind(this);
@@ -77,7 +77,11 @@ export default class Analyzer extends React.Component {
   submitQuery(event) {
     event.preventDefault();
 
-    return this.buildPromises(this.state.query)
+    const querySubmitted = this.state.queryInput;
+
+    this.setState({ querySubmitted });
+
+    return this.buildPromises(querySubmitted)
       .catch(r => console.warn(r));
   }
 
@@ -87,15 +91,12 @@ export default class Analyzer extends React.Component {
     }
   }
 
-  setQuery(event) {
-    this.setState({ query: event.target.value });
+  setQueryInput(event) {
+    this.setState({ queryInput: event.target.value });
   }
 
   render() {
-
-    // Should i just bring in redux here
-    // Separate the query that is types from submited (query and submittedQuery)
-    const text = this.state.query;
+    const text = this.state.querySubmitted;
 
     const tableTokenRows = this.state.analyzers.map(analyzer => {
       const key = getKey({ text, analyzer });
@@ -113,11 +114,11 @@ export default class Analyzer extends React.Component {
         <EuiFlexGroup>
           <EuiFlexItem>
             <EuiFieldText
-              placeholder="Enter Something To Tokenize..."
+              placeholder='Enter Something To Tokenize...'
               fullWidth
               onKeyDown={this.onKeyDown}
-              onChange={this.setQuery}
-              value={this.state.query}
+              onChange={this.setQueryInput}
+              value={this.state.queryInput}
             />
             <EuiButton
               onClick={this.submitQuery}
