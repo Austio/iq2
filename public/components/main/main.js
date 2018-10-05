@@ -4,7 +4,7 @@ import {
 } from '@elastic/eui';
 
 import IQMenu from './menu';
-import IQAnalyzer from './analyzer/index';
+import IQAnalyzer from './analyzer';
 
 export class Main extends React.Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ENTER } from '../../../lib/keyCodes';
+import { ENTER } from '../../lib/keyCodes';
 
 import {
   EuiFieldText,
@@ -11,7 +11,7 @@ import {
 
 import PropTypes from 'prop-types';
 
-import AnalyzedTokensTable from './analyzedTokensTable';
+import AnalyzedTokensTable from '../analyzer/analyzedTokensTable';
 
 export default class Analyzer extends React.Component {
   constructor(props) {

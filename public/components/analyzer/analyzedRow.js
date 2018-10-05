@@ -1,17 +1,6 @@
 import React from 'react';
 
 import {
-  EuiForm,
-  EuiFormRow,
-  EuiFieldText,
-  EuiFlexGroup,
-  EuiFlexItem,
-  EuiFieldSearch,
-  EuiButton,
-  EuiTable,
-  EuiTableHeader,
-  EuiTableHeaderCell,
-  EuiTableBody,
   EuiTableRow,
   EuiTableRowCell
 } from '@elastic/eui';

@@ -1,5 +1,5 @@
 // TokenizerCtrl
-import { esUrl } from '../../../lib/helper';
+import { esUrl } from '../../lib/helper';
 
 const url = esUrl({ path: '/_analyze'});
 
