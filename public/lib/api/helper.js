@@ -18,7 +18,7 @@ const errorHttpClient = {
   post: configureClientError,
   get: configureClientError,
   put: configureClientError,
-}
+};
 
 export {
   esUrl,
