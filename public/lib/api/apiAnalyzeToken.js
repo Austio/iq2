@@ -1,14 +1,10 @@
 // TokenizerCtrl
 import { esUrl } from '../../lib/helper';
 
-const url = esUrl({ path: '/_analyze'});
+const url = ;
 
 export default function analyzeText(http) {
-  return function analyzeToken({ text, analyzer } = {}) {
-    return http.post(url, {
-      analyzer,
-      text,
-    });
+  return function
   };
 }
 

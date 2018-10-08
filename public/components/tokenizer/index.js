@@ -11,7 +11,7 @@ import {
 
 import PropTypes from 'prop-types';
 
-import AnalyzedTokensTable from '../analyzer/analyzedTokensTable';
+import TokenizerTable from './tokenizerTable';
 
 export default class Analyzer extends React.Component {
   constructor(props) {
@@ -64,7 +64,7 @@ export default class Analyzer extends React.Component {
           </EuiFlexItem>
         </EuiFlexGroup>
 
-        <AnalyzedTokensTable text={this.state.querySubmitted} httpClient={this.props.httpClient}/>
+        <TokenizerTable text={this.state.querySubmitted} httpClient={this.props.httpClient}/>
       </div>
     );
   }

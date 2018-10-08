@@ -1,7 +1,5 @@
 import React from 'react';
 
-import AnalyzedRow from './analyzedRow';
-
 import {
   EuiHeader,
   EuiFlexGroup,
@@ -26,8 +24,6 @@ export default class AnalyzedTokensTable extends React.Component {
       results: {},
       analyzers: ['standard', 'simple', 'whitespace', 'stop', 'keyword', 'pattern', 'snowball'],
     };
-
-    this.httpClient = props.httpClient;
 
     this.analyzeText = this.analyzeText.bind(this);
     this.buildPromises = this.buildPromises.bind(this);
