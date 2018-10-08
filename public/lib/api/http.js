@@ -20,13 +20,26 @@ fetchTextTokens Returned Shape
   ]
 }
 */
-function fetchTextTokens({ text, analyzer }) {
-  return httpClient.post(esUrl({ path: '/_analyze'}), {
-    analyzer,
-    text,
-  });
-}
 
+/*
+curl -XGET 'http://localhost:9200/_analyze' -H "Content-Type:application/json" -d '
+{
+  "analyzer": "english",
+  "text": "silly silliness sillying sillied",
+  "tokenizer": "lowercase"
+}
+'
+Full Options Here, looks like it also takes an object
+https://github.com/elastic/elasticsearch/blob/99f88f15c5febbca2d13b5b5fda27b844153bf1a/server/src/main/java/org/elasticsearch/rest/action/admin/indices/RestAnalyzeAction.java#L104
+ */
+function fetchTextTokens({ text, analyzer, tokenizer }) {
+  const analyzeOptions = { text };
+
+  if (analyzer) analyzeOptions.analyzer = analyzer;
+  if (tokenizer) analyzeOptions.tokenizer = tokenizer;
+
+  return httpClient.post(esUrl({ path: '/_analyze'}), analyzeOptions);
+}
 
 /*
 Returned
