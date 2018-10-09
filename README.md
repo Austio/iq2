@@ -9,37 +9,41 @@ https://discuss.elastic.co/t/announcement-introducing-inquisitor-a-new-site-plug
 ---
 
 ## Development Setup
+
+-  Ensure that your folder structure is setup like this
+
+```
  |some_parent_folder_name
    |kibana
    |kibana-extra
-     |iq2
- - ensure you have folder structure above where kibana is the es/kibana cloned repo and iq-2 is this cloned repo
- - nvm local 8.11.4
+     |elastic-iq
+```
+
+- clone kibana into the `kibana` folder and checkout the branch for the version you are working on
+
+- Set node version `nvm local 8.11.4`
  
- - From kibana repo
-   - ensure that you are the appropriate version branch (6.3)
-   - run `yarn kbn bootstrap`
+- Elasticsearch 
+  - boot up elasticsearch or start one with `docker-compose up`
+ 
+- Kibana 
+  - From kibana directory above
+  - checkout the appropriate version branch (6.3/6.4/master/etc)
+  - run `yarn kbn bootstrap`
 
- - from iq2 directory 
-   - boot up elasticsearch  `docker-compose up`
-   - `yarn kbn boostrap` (1st time)
-   - `yarn start`
+- Elastic-IQ
+  - run `yarn kbn boostrap` (1st time)
+  - run `yarn start`
 
-See the [kibana contributing guide](https://github.com/elastic/kibana/blob/master/CONTRIBUTING.md) for instructions setting up your development environment. Once you have completed that, use the following yarn scripts.
-
-  - `yarn kbn bootstrap`
-
-    Install dependencies and crosslink Kibana and all projects/plugins.
-
-    > ***IMPORTANT:*** Use this script instead of `yarn` to install dependencies when switching branches, and re-run it whenever your dependencies change.
-
-  - `yarn start`
-
+   
     Start kibana and have it include this plugin. You can pass any arguments that you would normally send to `bin/kibana`
 
       ```
       yarn start --elasticsearch.url http://localhost:9220
       ```
+
+  
+See the [kibana contributing guide](https://github.com/elastic/kibana/blob/master/CONTRIBUTING.md) for instructions setting up your development environment. Once you have completed that, use the following yarn scripts.
 
   - `yarn build`
 
